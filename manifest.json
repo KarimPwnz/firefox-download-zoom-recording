@@ -6,7 +6,7 @@
   "manifest_version": 2,
   "version": "1.0",
   "icons": {
-    "96": "icon-96.png"
+    "96": "img/icon-96.png"
   },
 
   "content_scripts": [
