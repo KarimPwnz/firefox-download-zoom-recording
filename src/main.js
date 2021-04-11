@@ -24,11 +24,9 @@ function addSaveAs(url, name) {
 
 function injectDownloadLink(videoUrl) {
   // Generate video filename as {{date}}.mp4
-  var videoDate = videoUrl
-    .replace("https://ssrweb.zoom.us/cmr/replay/", "")
-    .split("/")
-    .slice(0, 3);
-  var videoName = `${videoDate.join(" ")}.mp4`;
+  var dateRe = /^https:\/\/ssrweb\.zoom\.us\/(?:cmr\/)?replay.*?\/(\d+)\/(\d+)\/(\d+)/;
+  var videoDateArr = videoUrl.match(dateRe).slice(1);
+  var videoName = `${videoDateArr.join(" ")}.mp4`;
   // Add link
   addSaveAs(videoUrl, videoName);
 }
