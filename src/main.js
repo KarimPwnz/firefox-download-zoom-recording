@@ -7,7 +7,7 @@ function extractVideoUrl() {
 // Add save as button
 
 function generateAnchor(url, name) {
-  var anchor = document.createElement("a");
+  let anchor = document.createElement("a");
   anchor.href = url;
   anchor.innerText = name;
   anchor.id = "save-as";
@@ -15,8 +15,8 @@ function generateAnchor(url, name) {
 }
 
 function addSaveAs(url, name) {
-  var mainDiv = document.getElementsByClassName("transcript-wrapper")[0];
-  var anchor = generateAnchor(url, name);
+  let mainDiv = document.getElementsByClassName("transcript-wrapper")[0];
+  let anchor = generateAnchor(url, name);
   mainDiv.insertAdjacentElement("afterbegin", anchor);
 }
 
@@ -24,21 +24,21 @@ function addSaveAs(url, name) {
 
 function injectDownloadLink(videoUrl) {
   // Generate video filename as {{date}}.mp4
-  var dateRe = /^https:\/\/ssrweb\.zoom\.us\/(?:cmr\/)?replay.*?\/(\d+)\/(\d+)\/(\d+)/;
-  var videoDateArr = videoUrl.match(dateRe).slice(1);
-  var videoName = `${videoDateArr.join(" ")}.mp4`;
+  let dateRe = /^https:\/\/ssrweb\.zoom\.us\/(?:cmr\/)?replay.*?\/(\d+)\/(\d+)\/(\d+)/;
+  let videoDateArr = videoUrl.match(dateRe).slice(1);
+  let videoName = `${videoDateArr.join(" ")}.mp4`;
   // Add link
   addSaveAs(videoUrl, videoName);
 }
 
 function main() {
   // Check if anchor already on page
-  var saveAsAnchor = document.getElementById("save-as");
+  let saveAsAnchor = document.getElementById("save-as");
   if (saveAsAnchor) return;
 
   // Run observer to wait for proper video URL
-  var observer = new MutationObserver(() => {
-    var url = extractVideoUrl();
+  let observer = new MutationObserver(() => {
+    let url = extractVideoUrl();
     if (!url.length) return;
     injectDownloadLink(url);
     observer.disconnect();
